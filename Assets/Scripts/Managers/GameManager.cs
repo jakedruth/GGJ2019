@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    [Range(0, 1)]
+    private static float _gameSpeedMultiplier = 1.0f;
 
-    [MinMaxRange(0,10)]
-    public RangedFloat range;
+    public static float GameTime
+    {
+        get { return Time.deltaTime * _gameSpeedMultiplier; }
+    }
+
+    public static GameManager instance;
 
     // Start is called before the first frame update
     void Awake()
