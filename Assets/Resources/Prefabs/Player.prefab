@@ -107,8 +107,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.29999998
-      value: -180
+      time: 0.19999999
+      value: -130
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.1
+      time: 0.065
       value: 1
       inSlope: 0
       outSlope: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.14999999
+      time: 0.12
       value: 1
       inSlope: 0
       outSlope: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.29999998
+      time: 0.19999999
       value: 0
       inSlope: 0
       outSlope: 0
@@ -249,11 +249,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7815460333010385662}
+  - component: {fileID: 7815460333010385649}
+  - component: {fileID: 7815460333010385661}
   - component: {fileID: 7815460333010385663}
   - component: {fileID: 7815460333010385648}
   - component: {fileID: 7815460333010385660}
-  - component: {fileID: 7815460333010385649}
-  - component: {fileID: 7815460333010385661}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -276,48 +276,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7815460333010385663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7815460333010385650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c804ce2b2ba7ddb4f8d164de0c183423, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayer: 1
-  maxHP: 50
---- !u!114 &7815460333010385648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7815460333010385650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6e62a9a5aa6c8143b7a9762983fb544, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMoveSpeed: 6
-  acceleration: 50
-  friction: 100
-  rotateSpeed: 1080
---- !u!114 &7815460333010385660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7815460333010385650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a896a29519884d4e944e0ff8363dba5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!70 &7815460333010385649
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -355,6 +313,53 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7815460333010385663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815460333010385650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c804ce2b2ba7ddb4f8d164de0c183423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 1
+  maxHP: 5
+--- !u!114 &7815460333010385648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815460333010385650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e62a9a5aa6c8143b7a9762983fb544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMoveSpeed: 6
+  acceleration: 50
+  friction: 100
+  rotateSpeed: 1080
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  swordLength: 1
+  swordDamage: 1
+--- !u!114 &7815460333010385660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815460333010385650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a896a29519884d4e944e0ff8363dba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8658995186572404370
 GameObject:
   m_ObjectHideFlags: 0

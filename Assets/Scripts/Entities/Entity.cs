@@ -10,6 +10,11 @@ public class Entity : MonoBehaviour
     public float maxHP;
     public float CurrentHP { get; private set; }
 
+    private float _hitCoolDownTimer = 0.25f;
+    private float _coolDownTimer;
+
+    private HealthBar _healthBar;
+
     public bool isDead { get; private set; }
 
     public delegate void OnDeath();
@@ -24,19 +29,49 @@ public class Entity : MonoBehaviour
     /// Deal a certain amount of damage to the entity
     /// </summary>
     /// <param name="value"> Amount to deal damage </param>
-    public void DealDamage(float value)
+    public void DealDamage(float value, bool ignoreInvincibilty = false)
     {
         if (isDead)
             return;
 
-        Debug.Log($"dealing {value} damage to {name}");
+        //Debug.Log($"dealing {value} damage to {name}");
 
-        CurrentHP = Mathf.Clamp(CurrentHP - value, 0, maxHP);
-        isDead = CurrentHP <= 0;
-        if (isDead)
+        if (!IsInvincible() || ignoreInvincibilty)
         {
-            CurrentHP = 0;
-            onDeath?.Invoke();
+            CurrentHP = Mathf.Clamp(CurrentHP - value, 0, maxHP);
+            HandleHealthBar();
+            isDead = CurrentHP <= 0;
+            if (isDead)
+            {
+                CurrentHP = 0;
+                onDeath?.Invoke();
+            }
         }
+
+        if (!ignoreInvincibilty)
+            _coolDownTimer = _hitCoolDownTimer;
+    }
+
+    private void HandleHealthBar()
+    {
+        if(_healthBar == null)
+        {
+            HealthBar bar = Resources.Load<HealthBar>("Prefabs/HealthBar");
+            _healthBar = Instantiate(bar, transform);
+        }
+
+        _healthBar.SetHealthBar(CurrentHP / maxHP);
+        _healthBar.ResetTimer();
+    }
+
+    public void Update()
+    {
+        if (IsInvincible())
+            _coolDownTimer -= GameManager.GameTime;
+    }
+
+    private bool IsInvincible()
+    {
+        return _coolDownTimer > 0;
     }
 }

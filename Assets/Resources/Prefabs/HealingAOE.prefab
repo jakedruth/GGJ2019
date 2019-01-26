@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4307e1cd4e2a24883e88d9b5fd9b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage_dealt: 2
+  damage_dealt: 0.5
   affects_player: 1
   affects_enemy: 0
 --- !u!61 &6972733162718674324
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 6972733162794815285}
   - component: {fileID: 6972733162794815284}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

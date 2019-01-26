@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Entity _entity;
     private SwordHandler _sword;
 
+    [Header("Movement")]
     public float maxMoveSpeed;
     public float acceleration;
     public float friction;
@@ -16,11 +17,17 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed;
     private float _facing;
 
+    [Header("Enemy Interaction")]
+    public LayerMask enemyLayer;
+    public float swordLength;
+    public float swordDamage;
 
     public void Start()
     {
         _entity = GetComponent<Entity>();
         _entity.isPlayer = true;
+        _entity.onDeath += PlayerDied;
+
         _sword = transform.GetComponentInChildren<SwordHandler>();
     }
 
@@ -35,6 +42,17 @@ public class PlayerController : MonoBehaviour
         if (_sword.IsAttacking())
         {
             //Debug.DrawRay(_sword.transform.position, _sword.transform.right, Color.blue, 1.0f);
+            Ray2D ray = new Ray2D(_sword.transform.position, _sword.transform.right);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, swordLength, enemyLayer);
+            if(hit)
+            {
+                //Debug.Log($"Hit game objec: {hit.transform.name}");
+                if (hit.transform != transform)
+                {
+                    Entity entity = hit.transform.GetComponent<Entity>();
+                    entity.DealDamage(swordDamage);
+                }
+            }
         }
 
         const float deadZone = 0.01f;
@@ -69,5 +87,10 @@ public class PlayerController : MonoBehaviour
     public void Shield()
     {
 
+    }
+
+    public void PlayerDied()
+    {
+        Debug.Log("Player Died");
     }
 }
