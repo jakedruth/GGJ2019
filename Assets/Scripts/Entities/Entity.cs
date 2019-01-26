@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public bool isPlayer;
     public float maxHP;
     public float CurrentHP { get; private set; }
 
