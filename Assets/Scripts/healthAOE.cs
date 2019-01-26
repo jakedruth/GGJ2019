@@ -51,7 +51,7 @@ public class healthAOE : MonoBehaviour
         Entity entity = collision.GetComponent<Entity>();
         if (entity != null)
         {
-            affects_list.Add(entity);
+            affects_list.Remove(entity);
         }
 
     }
