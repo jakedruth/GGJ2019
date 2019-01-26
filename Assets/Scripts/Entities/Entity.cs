@@ -13,27 +13,27 @@ public class Entity : MonoBehaviour
     public delegate void OnDeath();
     public OnDeath onDeath;
 
+    public void Awake()
+    {
+        CurrentHP = maxHP;
+    }
+
     /// <summary>
     /// Deal a certain amount of damage to the entity
     /// </summary>
     /// <param name="value"> Amount to deal damage </param>
     public void DealDamage(float value)
     {
-        CurrentHP -= value;
+        if (isDead)
+            return;
 
+        CurrentHP = Mathf.Clamp(CurrentHP - value, 0, maxHP);
         isDead = CurrentHP <= 0;
-
         if (isDead)
         {
             CurrentHP = 0;
-            if (onDeath != null)
-                onDeath();
+            onDeath?.Invoke();
         }
-
     }
 
-    public void Awake()
-    {
-        CurrentHP = maxHP;
-    }
 }
