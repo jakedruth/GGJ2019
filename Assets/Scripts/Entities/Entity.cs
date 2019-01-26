@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[SelectionBase]
 public class Entity : MonoBehaviour
 {
     public bool isPlayer;
@@ -27,6 +29,8 @@ public class Entity : MonoBehaviour
         if (isDead)
             return;
 
+        Debug.Log($"dealing {value} damage to {name}");
+
         CurrentHP = Mathf.Clamp(CurrentHP - value, 0, maxHP);
         isDead = CurrentHP <= 0;
         if (isDead)
@@ -35,5 +39,4 @@ public class Entity : MonoBehaviour
             onDeath?.Invoke();
         }
     }
-
 }
