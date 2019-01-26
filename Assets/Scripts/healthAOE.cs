@@ -22,12 +22,12 @@ public class healthAOE : MonoBehaviour
 
         foreach (Entity entity in affects_list)
         {
-            if(entity.isPlayer & affects_player)
+            if(entity.isPlayer && affects_player)
             {
                 entity.DealDamage(GameManager.GameTime * damage_dealt);
             }
 
-            if(!entity.isPlayer & affects_enemy)
+            if(!entity.isPlayer && affects_enemy)
             {
                 entity.DealDamage(GameManager.GameTime * damage_dealt);
             }
