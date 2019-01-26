@@ -11,14 +11,14 @@ public class quest : ScriptableObject
     public int reward = 0;
     public int cost = 0;
     public List<string> rooms = new List<string>();
-    private int current_room = 0;
-    
-    //modifyers
+    public int current_room = 0;
+
 
     public void loadRoom()
     {
         Debug.Log($"loading room {rooms[current_room]}");
 
+        levelHandeler.instance.loadScene(rooms[current_room]);
 
 
 
@@ -29,7 +29,7 @@ public class quest : ScriptableObject
     public void checkReward()
     {
         current_room++;
-        if(rooms[current_room] != null)
+        if(rooms.Count != current_room)
         {
             loadRoom();
             return;
