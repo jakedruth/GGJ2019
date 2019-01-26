@@ -8,7 +8,7 @@ public class healthAOE : MonoBehaviour
     public float damage_dealt = 0.0f;
     public bool affects_player = false;
     public bool affects_enemy = false;
-    private List<Entity> affects_list;
+    private List<Entity> affects_list = new List<Entity>();
     
     // Start is called before the first frame update
     void Start()
@@ -38,13 +38,21 @@ public class healthAOE : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        affects_list.Add(collision.GetComponent<Entity>());
+        Entity entity = collision.GetComponent<Entity>();
+        if (entity != null)
+        { 
+        affects_list.Add(entity);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
 
-        affects_list.Remove(collision.GetComponent<Entity>());
-        
+        Entity entity = collision.GetComponent<Entity>();
+        if (entity != null)
+        {
+            affects_list.Add(entity);
+        }
+
     }
 }
