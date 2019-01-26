@@ -24,7 +24,7 @@ public class SwordHandler : MonoBehaviour
         float timer = 0;
         while (timer < attackTime)
         {
-            timer += GameManager.GameTime;
+            timer += GameManager.DeltaTime;
 
             float percentage = timer / attackTime;
             float angle = rotationCurve.Evaluate(timer);

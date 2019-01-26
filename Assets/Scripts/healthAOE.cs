@@ -24,12 +24,12 @@ public class healthAOE : MonoBehaviour
         {
             if(entity.isPlayer && affects_player)
             {
-                entity.DealDamage(GameManager.GameTime * damage_dealt, true);
+                entity.DealDamage(GameManager.DeltaTime * damage_dealt, true);
             }
 
             if(!entity.isPlayer && affects_enemy)
             {
-                entity.DealDamage(GameManager.GameTime * damage_dealt, true);
+                entity.DealDamage(GameManager.DeltaTime * damage_dealt, true);
             }
         }
        

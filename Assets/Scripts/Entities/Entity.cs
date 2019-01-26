@@ -67,7 +67,7 @@ public class Entity : MonoBehaviour
     public void Update()
     {
         if (IsInvincible())
-            _coolDownTimer -= GameManager.GameTime;
+            _coolDownTimer -= GameManager.DeltaTime;
     }
 
     private bool IsInvincible()

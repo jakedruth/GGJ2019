@@ -8,9 +8,9 @@ public class Enemy : MonoBehaviour
     public float pushForce;
     public float damage;
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        PlayerController pc = collision.GetComponent<PlayerController>();
+        PlayerController pc = collision.transform.GetComponent<PlayerController>();
         if (pc != null)
         {
             Vector3 displacement = pc.transform.position - transform.position;

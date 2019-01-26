@@ -37,9 +37,9 @@ public class HealthBar : MonoBehaviour
 
     public void Update()
     {
-        _timer += GameManager.GameTime;
+        _timer += GameManager.DeltaTime;
         Vector3 targetScale = _timer < showHealthBarTimer ? Vector3.one : Vector3.zero;
-        _scale = Vector3.MoveTowards(_scale, targetScale, transitionSpeed * GameManager.GameTime);
+        _scale = Vector3.MoveTowards(_scale, targetScale, transitionSpeed * GameManager.DeltaTime);
         if (transform.localScale != targetScale)
         {
             transform.localScale = _scale;

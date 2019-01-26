@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private SwordHandler _sword;
 
     [Header("Movement")]
+    public LayerMask wallLayer;
     public float maxMoveSpeed;
     public float acceleration;
     public float friction;
@@ -62,16 +63,21 @@ public class PlayerController : MonoBehaviour
             targetSpeed = maxMoveSpeed;
             float angle = Vector3.SignedAngle(direction, Vector3.right, Vector3.back);
             //float targetAngle = Mathf.Round(angle / 45f) * 45f; // created choppy rotation some how?
-            _facing = Mathf.MoveTowardsAngle(_facing, angle, rotateSpeed * GameManager.GameTime);
+            _facing = Mathf.MoveTowardsAngle(_facing, angle, rotateSpeed * GameManager.DeltaTime);
             transform.GetChild(0).rotation = Quaternion.AngleAxis(_facing, Vector3.forward);
         }
 
-        _velocity = Vector3.MoveTowards(_velocity, direction * targetSpeed, acceleration * GameManager.GameTime);
-        _force = Vector3.MoveTowards(_force, Vector3.zero, friction * GameManager.GameTime);
+        _velocity = Vector3.MoveTowards(_velocity, direction * targetSpeed, acceleration * GameManager.DeltaTime);
+        _force = Vector3.MoveTowards(_force, Vector3.zero, friction * GameManager.DeltaTime);
+    }
 
-        Vector3 pos = (_velocity + _force)* GameManager.GameTime;
+    public void FixedUpdate()
+    {
+        Vector3 pos = (_velocity + _force) * GameManager.FidexDeltaTime;
         transform.position += pos;
     }
+
+
 
     public void ApplyForce(Vector3 force)
     {

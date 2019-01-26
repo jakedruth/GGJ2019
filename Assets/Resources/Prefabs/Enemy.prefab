@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4055688666211027130}
   - component: {fileID: 4055688666211027109}
+  - component: {fileID: 4055688666211027112}
   - component: {fileID: 4055688666211027108}
   - component: {fileID: 4055688666211027111}
   m_Layer: 9
@@ -44,7 +45,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -60,6 +61,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &4055688666211027112
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4055688666211027110}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &4055688666211027108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  maxHP: 2
+  maxHP: 3
 --- !u!114 &4055688666211027111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushForce: 20
-  damage: 3
+  damage: 1
 --- !u!1 &4055688667483368042
 GameObject:
   m_ObjectHideFlags: 0
