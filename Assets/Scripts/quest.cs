@@ -37,6 +37,9 @@ public class quest : ScriptableObject
 
         //give rewards load hub
 
+
+        current_room = 0;
+
     }
 
     
