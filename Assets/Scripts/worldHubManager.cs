@@ -13,6 +13,7 @@ public class worldHubManager : MonoBehaviour
 
 
     public int money = 0;
+    private int maxMoney = 1000;
 
     private int maxUpgrade = 10;
     public int currentHouseLevel = 0;
@@ -65,6 +66,14 @@ public class worldHubManager : MonoBehaviour
 
     }
 
+    public void GiveMoney(int moneyGain)
+    {
+        money = money + moneyGain;
+        if(money > maxMoney)//if money over money max set moeny to max
+        {
+            money = maxMoney;
+        }
+    }
 
     public void IncreaseHealth()
     {

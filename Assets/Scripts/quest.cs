@@ -37,8 +37,10 @@ public class quest : ScriptableObject
 
         //give rewards load hub
 
-
+        worldHubManager.instance.GiveMoney(reward);
         current_room = 0;
+
+        levelHandeler.instance.loadScene("hubWorld");
 
     }
 
