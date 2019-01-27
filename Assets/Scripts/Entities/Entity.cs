@@ -65,8 +65,8 @@ public class Entity : MonoBehaviour
     {
         if (_healthBar == null)
         {
-            HealthBar bar = Resources.Load<HealthBar>("Prefabs/HealthBar");
-            _healthBar = Instantiate(bar, transform);
+            HealthBar healthBarPrefab = Resources.Load<HealthBar>("Prefabs/HealthBar");
+            _healthBar = Instantiate(healthBarPrefab, transform);
         }
 
         _healthBar.SetHealthBar(CurrentHP / maxHP);
@@ -82,13 +82,13 @@ public class Entity : MonoBehaviour
     }
 
 
-    public List<KeyValuePair<Vector3, float>> pushDirections { get; set; } = new List<KeyValuePair<Vector3, float>>();
+    public List<KeyValuePair<Vector3, float>> PushDirections { get; set; } = new List<KeyValuePair<Vector3, float>>();
 
     public void FixedUpdate()
     {
         Vector3 pushDir = Vector3.zero;
         float pushSpeed = 0;
-        foreach (KeyValuePair<Vector3, float> pair in pushDirections)
+        foreach (KeyValuePair<Vector3, float> pair in PushDirections)
         {
             pushDir += pair.Key;
             pushSpeed = Mathf.Max(pushSpeed, pair.Value);

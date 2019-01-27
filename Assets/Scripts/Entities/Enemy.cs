@@ -9,15 +9,27 @@ public class Enemy : MonoBehaviour
     public float damage;
     public bool lookAtPlayer;
 
+    [Header("Movement")]
+    public float rotateSpeed;
+    public float rotationInDegrees { get; private set; }
+    public Vector3 facing { get; protected set; }
+
     public void Update()
     {
         if(lookAtPlayer)
         {
             PlayerController pc = GetClosestPlayer();
             Vector3 displacement = pc.transform.position - transform.position;
-            float angle = Vector3.SignedAngle(displacement, Vector3.right, Vector3.back);
-            transform.GetChild(0).rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            LookTowards(displacement);
         }
+    }
+
+    public void LookTowards(Vector3 direction)
+    {
+        facing = direction.normalized;
+        float targetAngle = Vector3.SignedAngle(direction, Vector3.right, Vector3.back);
+        rotationInDegrees = Mathf.MoveTowardsAngle(rotationInDegrees, targetAngle, rotateSpeed * GameManager.DeltaTime);
+        transform.GetChild(0).rotation = Quaternion.AngleAxis(rotationInDegrees, Vector3.forward);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

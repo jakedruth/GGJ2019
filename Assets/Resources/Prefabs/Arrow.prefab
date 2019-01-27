@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7910062932137872243}
   - component: {fileID: 7910062932137872255}
   - component: {fileID: 7910062932137872254}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,3 +140,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushSpeed: 1
+  angled: 0

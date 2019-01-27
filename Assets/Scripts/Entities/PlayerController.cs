@@ -7,10 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     private Entity _entity;
     private SwordHandler _sword;
+    private ShieldHandler shield;
 
     [Header("Movement")]
     public float rotateSpeed;
-    private float _facing;
+    public float rotationInDegrees { get; private set; }
+    //public Vector3 facing { get; private set; }
+
 
     [Header("Enemy Interaction")]
     public LayerMask swordInteractLayer;
@@ -30,7 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         if (attackKeyDown)
         {
-            _sword.StartAttack(_facing);
+            _sword.StartAttack(rotationInDegrees);
         }
 
         // check for entities
@@ -63,8 +66,8 @@ public class PlayerController : MonoBehaviour
             targetSpeed = _entity.maxMoveSpeed;
             float angle = Vector3.SignedAngle(direction, Vector3.right, Vector3.back);
             //float targetAngle = Mathf.Round(angle / 45f) * 45f; // created choppy rotation some how?
-            _facing = Mathf.MoveTowardsAngle(_facing, angle, rotateSpeed * GameManager.DeltaTime);
-            transform.GetChild(0).rotation = Quaternion.AngleAxis(_facing, Vector3.forward);
+            rotationInDegrees = Mathf.MoveTowardsAngle(rotationInDegrees, angle, rotateSpeed * GameManager.DeltaTime);
+            transform.GetChild(0).rotation = Quaternion.AngleAxis(rotationInDegrees, Vector3.forward);
         }
 
         _entity.velocity = Vector3.MoveTowards(_entity.velocity, direction * targetSpeed, _entity.acceleration * GameManager.DeltaTime);

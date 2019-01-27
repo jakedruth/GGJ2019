@@ -17,22 +17,12 @@ public class ArrowPusher : MonoBehaviour
         get { return new KeyValuePair<Vector3, float>(Direction, pushSpeed); }
     }
 
-    //private void Update()
-    //{
-    //    foreach (Entity e in entities)
-    //    {
-    //        Vector3 direction = angled ? (transform.right + transform.up).normalized : transform.right;
-    //        e.pushDirection += direction;
-    //        e.pushSpeed = Mathf.Max
-    //    }
-    //}
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Entity other = collision.GetComponent<Entity>();
         if (other != null)
         {
-            other.pushDirections.Add(Pair);
+            other.PushDirections.Add(Pair);
         }
     }
 
@@ -41,7 +31,7 @@ public class ArrowPusher : MonoBehaviour
         Entity other = collision.GetComponent<Entity>();
         if (other != null)
         {
-            other.pushDirections.Remove(Pair);
+            other.PushDirections.Remove(Pair);
         }
     }
 }
