@@ -14,7 +14,7 @@ public class CameraSwitchOnTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"{name} collided with: {collision.transform.name}");
+        //Debug.Log($"{name} collided with: {collision.transform.name}");
         if(collision.tag == "Player")
         {
             vcamOnEnter.enabled = true;

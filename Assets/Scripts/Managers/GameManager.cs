@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Range(0, 1)]
-    private static float _gameSpeedMultiplier = 1.0f;
+    public static float gameSpeedMultiplier { get; private set; } = 1.0f;
 
     public static float DeltaTime
     {
-        get { return Time.deltaTime * _gameSpeedMultiplier; }
+        get { return Time.deltaTime * gameSpeedMultiplier; }
     }
 
     public static float FidexDeltaTime
     {
-        get { return Time.fixedDeltaTime * _gameSpeedMultiplier; }
+        get { return Time.fixedDeltaTime * gameSpeedMultiplier; }
     }
 
     public static GameManager instance;

@@ -9,17 +9,11 @@ public class PlayerController : MonoBehaviour
     private SwordHandler _sword;
 
     [Header("Movement")]
-    public LayerMask wallLayer;
-    public float maxMoveSpeed;
-    public float acceleration;
-    public float friction;
-    private Vector3 _velocity;
-    private Vector3 _force;
     public float rotateSpeed;
     private float _facing;
 
     [Header("Enemy Interaction")]
-    public LayerMask enemyLayer;
+    public LayerMask swordInteractLayer;
     public float swordLength;
     public float swordDamage;
 
@@ -44,14 +38,20 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.DrawRay(_sword.transform.position, _sword.transform.right, Color.blue, 1.0f);
             Ray2D ray = new Ray2D(_sword.transform.position, _sword.transform.right);
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, swordLength, enemyLayer);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, swordLength, swordInteractLayer);
             if(hit)
             {
-                //Debug.Log($"Hit game objec: {hit.transform.name}");
-                if (hit.transform != transform)
+                if (hit.transform.tag == "enemy")
                 {
+                    //Debug.Log($"Hit game objec: {hit.transform.name}");
                     Entity entity = hit.transform.GetComponent<Entity>();
                     entity.DealDamage(swordDamage);
+                    entity.ApplyForce(ray.direction * 10);
+                }
+                if(hit.transform.tag == "Switch")
+                {
+                    Switch s = hit.transform.GetComponent<Switch>();
+                    s.ActivateSwitch();
                 }
             }
         }
@@ -60,29 +60,14 @@ public class PlayerController : MonoBehaviour
         float targetSpeed = 0;
         if (direction.sqrMagnitude > deadZone * deadZone && !_sword.IsAttacking())
         {
-            targetSpeed = maxMoveSpeed;
+            targetSpeed = _entity.maxMoveSpeed;
             float angle = Vector3.SignedAngle(direction, Vector3.right, Vector3.back);
             //float targetAngle = Mathf.Round(angle / 45f) * 45f; // created choppy rotation some how?
             _facing = Mathf.MoveTowardsAngle(_facing, angle, rotateSpeed * GameManager.DeltaTime);
             transform.GetChild(0).rotation = Quaternion.AngleAxis(_facing, Vector3.forward);
         }
 
-        _velocity = Vector3.MoveTowards(_velocity, direction * targetSpeed, acceleration * GameManager.DeltaTime);
-        _force = Vector3.MoveTowards(_force, Vector3.zero, friction * GameManager.DeltaTime);
-    }
-
-    public void FixedUpdate()
-    {
-        Vector3 pos = (_velocity + _force) * GameManager.FidexDeltaTime;
-        transform.position += pos;
-    }
-
-
-
-    public void ApplyForce(Vector3 force)
-    {
-        _force += force;
-
+        _entity.velocity = Vector3.MoveTowards(_entity.velocity, direction * targetSpeed, _entity.acceleration * GameManager.DeltaTime);
     }
 
     public void Attack()

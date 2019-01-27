@@ -290,7 +290,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9, y: 0.9}
   m_Direction: 0
 --- !u!50 &7815460333010385661
 Rigidbody2D:
@@ -327,6 +327,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 1
   maxHP: 5
+  maxMoveSpeed: 6
+  acceleration: 50
+  friction: 100
+  OnEntityDeath:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &7815460333010385648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,16 +347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e62a9a5aa6c8143b7a9762983fb544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  maxMoveSpeed: 6
-  acceleration: 50
-  friction: 100
   rotateSpeed: 1080
-  enemyLayer:
+  swordInteractLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4608
   swordLength: 1
   swordDamage: 1
 --- !u!114 &7815460333010385660

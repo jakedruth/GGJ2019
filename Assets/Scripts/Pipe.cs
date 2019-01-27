@@ -1,20 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Pipe : MonoBehaviour
 {
     public ParticleSystem spark;
-    private LineRenderer _lineRenderer;
+    public Transform path;
+    private LineRenderer _lr;
     public float totalTimeForSpark;
     private float _timer;
     private float _totalLength;
     private bool IsRunning;
 
+    [Tooltip("If negative, the onEndSPark will only be called once")]
+    public float timeBetweenRecallOnEndSpark = -1;
+    public UnityEvent onEndSpark;
+
     public void Awake()
     {
-        _lineRenderer = GetComponent<LineRenderer>();
+        _lr = GetComponent<LineRenderer>();
+        _lr.positionCount = path.childCount;
+        for (int i = 0; i < path.childCount; i++)
+        {
+            _lr.SetPosition(i, path.GetChild(i).position);
+        }
+
         CalculateTotalLengthOfLine();
     }
 
@@ -32,10 +44,10 @@ public class Pipe : MonoBehaviour
     {
         spark.Play();
 
-        for (int i = 0; i < _lineRenderer.positionCount - 1; i++)
+        for (int i = 0; i < path.childCount - 1; i++)
         {
-            Vector3 a = _lineRenderer.GetPosition(i);
-            Vector3 b = _lineRenderer.GetPosition(i + 1);
+            Vector3 a = path.GetChild(i).position;
+            Vector3 b = path.GetChild(i + 1).position;
             float dist = (b - a).magnitude;
             float distPercentage = dist / _totalLength;
             float timePerSegment = totalTimeForSpark * distPercentage;
@@ -46,23 +58,47 @@ public class Pipe : MonoBehaviour
                 float percentage = timer / timePerSegment;
 
                 Vector3 pos = Vector3.Lerp(a, b, percentage);
-                spark.transform.localPosition = pos;
+                spark.transform.position = pos;
 
                 yield return null;
             }
         }
 
         IsRunning = false;
+
         spark.Stop();
+
+        onEndSpark.Invoke();
+
+        if (timeBetweenRecallOnEndSpark > 0)
+        {
+            yield return new WaitForSeconds(timeBetweenRecallOnEndSpark * GameManager.gameSpeedMultiplier);
+            onEndSpark.Invoke();
+        }
     }
 
     private void CalculateTotalLengthOfLine()
     {
         _totalLength = 0;
-        for (int i = 0; i < _lineRenderer.positionCount - 1; i++)
+        for (int i = 0; i < path.childCount - 1; i++)
         {
-            float dist = (_lineRenderer.GetPosition(i + 1) - _lineRenderer.GetPosition(i)).magnitude;
+            Vector3 a = path.GetChild(i).position;
+            Vector3 b = path.GetChild(i + 1).position;
+            float dist = (b - a).magnitude;
             _totalLength += dist;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawCube(path.GetChild(0).position, Vector3.one * 0.2f);
+        for (int i = 0; i < path.childCount - 1; i++)
+        {
+            Vector3 a = path.GetChild(i).position;
+            Vector3 b = path.GetChild(i + 1).position;
+            Gizmos.DrawLine(a, b);
+            Gizmos.DrawCube(b, Vector3.one * 0.2f);
         }
     }
 }

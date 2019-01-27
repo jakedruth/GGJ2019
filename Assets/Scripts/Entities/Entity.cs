@@ -10,6 +10,16 @@ public class Entity : MonoBehaviour
     public float maxHP;
     public float CurrentHP { get; private set; }
 
+    [Header("Movement")]
+    public float maxMoveSpeed;
+    public float acceleration;
+    public float friction;
+    public Vector3 velocity { get; set; }
+    public Vector3 force { get; set; }
+    public Vector3 constantSpeed { get; set; }
+
+    public Vector3 Direction { get; set; }
+
     private float _hitCoolDownTimer = 0.25f;
     private float _coolDownTimer;
 
@@ -18,7 +28,7 @@ public class Entity : MonoBehaviour
     public bool isDead { get; private set; }
 
     public UnityEvent OnEntityDeath;
-    
+
     public void Awake()
     {
         CurrentHP = maxHP;
@@ -53,7 +63,7 @@ public class Entity : MonoBehaviour
 
     private void HandleHealthBar()
     {
-        if(_healthBar == null)
+        if (_healthBar == null)
         {
             HealthBar bar = Resources.Load<HealthBar>("Prefabs/HealthBar");
             _healthBar = Instantiate(bar, transform);
@@ -67,6 +77,30 @@ public class Entity : MonoBehaviour
     {
         if (IsInvincible())
             _coolDownTimer -= GameManager.DeltaTime;
+
+        force = Vector3.MoveTowards(force, Vector3.zero, friction * GameManager.DeltaTime);
+    }
+
+
+    public List<KeyValuePair<Vector3, float>> pushDirections { get; set; } = new List<KeyValuePair<Vector3, float>>();
+
+    public void FixedUpdate()
+    {
+        Vector3 pushDir = Vector3.zero;
+        float pushSpeed = 0;
+        foreach (KeyValuePair<Vector3, float> pair in pushDirections)
+        {
+            pushDir += pair.Key;
+            pushSpeed = Mathf.Max(pushSpeed, pair.Value);
+        }
+
+        Vector3 pos = (velocity + force + pushDir.normalized * pushSpeed) * GameManager.FidexDeltaTime;
+        transform.position += pos;
+    }
+
+    public void ApplyForce(Vector3 force)
+    {
+        this.force += force;
     }
 
     private bool IsInvincible()

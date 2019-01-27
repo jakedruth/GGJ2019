@@ -69,9 +69,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 34215190309718179}
-  - component: {fileID: 34215190309718178}
   - component: {fileID: 34215190309718177}
   - component: {fileID: 34215190309718188}
+  - component: {fileID: 34215190309718178}
   m_Layer: 0
   m_Name: ElectricField
   m_TagString: Untagged
@@ -95,6 +95,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &34215190309718177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34215190309718176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b64f67a5bbc6f41a044e4c195f0264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPoint: {fileID: 34215190049718941}
+  endPoint: {fileID: 34215190095185095}
+  randomPosOffset: 0.3
+  widthRange:
+    minimum: 0.1
+    maximum: 0.4
+  frameTime: 0.05
+  shaderIsAnimated: 0
+  useRandomStartFrame: 0
+  shaderNumOfFrames: 0
+--- !u!114 &34215190309718188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34215190309718176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b8bbd621c587a4090803949d5e91b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageIfTouched: 0.5
+  entityLayer:
+    serializedVersion: 2
+    m_Bits: 2560
 --- !u!120 &34215190309718178
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -190,41 +228,3 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &34215190309718177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34215190309718176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57b64f67a5bbc6f41a044e4c195f0264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPoint: {fileID: 34215190049718941}
-  endPoint: {fileID: 34215190095185095}
-  randomPosOffset: 0.3
-  widthRange:
-    minimum: 0.1
-    maximum: 0.4
-  frameTime: 0.05
-  shaderIsAnimated: 0
-  useRandomStartFrame: 0
-  shaderNumOfFrames: 0
---- !u!114 &34215190309718188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34215190309718176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b8bbd621c587a4090803949d5e91b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageIfTouched: 0.5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 2560

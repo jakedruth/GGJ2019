@@ -9,7 +9,7 @@ public class ElectricDoor : MonoBehaviour
     private AnimateLineRenderer _animatedLine;
     public float damageIfTouched;
     public bool IsOn { get; private set; } = true;
-    public LayerMask playerLayer;
+    public LayerMask entityLayer;
     Vector3 displacement;
     Vector3 perpidicular;
     Plane _plane;
@@ -30,12 +30,12 @@ public class ElectricDoor : MonoBehaviour
         {
             Ray2D ray = new Ray2D(_animatedLine.startPoint.position, displacement);
 
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, displacement.magnitude, playerLayer);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, displacement.magnitude, entityLayer);
             if (hit)
             {
                 if (hit.transform.tag == "Player")
                 {
-                    PlayerController pc = hit.transform.GetComponent<PlayerController>();
+                    Entity pc = hit.transform.GetComponent<Entity>();
                     float force = 20;
                     bool sameSide = _plane.GetSide(hit.transform.position);
 
@@ -51,13 +51,13 @@ public class ElectricDoor : MonoBehaviour
         }
     }
 
-    [ContextMenu("Toggle Door")]
-    public bool ToggleDoor()
+    //[ContextMenu("Toggle Door")]
+    public void ToggleDoor()
     {
         IsOn = !IsOn;
 
         GetComponent<LineRenderer>().enabled = IsOn;
 
-        return IsOn;
+        //return IsOn;
     }
 }
