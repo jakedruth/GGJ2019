@@ -34,13 +34,13 @@ public class PlayerController : MonoBehaviour
 
     public void RecieveInput(Vector3 direction, bool attackKeyDown, bool shieldKey)
     {
-        if (attackKeyDown)
+        IsShielding = shieldKey;
+        ShieldRef.gameObject.SetActive(IsShielding);
+
+        if (attackKeyDown && !IsShielding)
         {
             SwordRef.StartAttack(rotationInDegrees);
         }
-
-        IsShielding = shieldKey;
-        ShieldRef.gameObject.SetActive(IsShielding);
 
         // check for entities
         if (SwordRef.IsAttacking())
@@ -61,6 +61,12 @@ public class PlayerController : MonoBehaviour
                 {
                     Switch s = hit.transform.GetComponent<Switch>();
                     s.ActivateSwitch();
+                }
+                if(hit.transform.tag == "Bomb")
+                {
+                    Bomb b = hit.transform.GetComponent<Bomb>();
+                    Vector3 displacement = b.transform.position - transform.position;
+                    b.ApplyForce(displacement.normalized);
                 }
             }
         }

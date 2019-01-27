@@ -6,6 +6,7 @@ TagManager:
   tags:
   - enemy
   - Switch
+  - Bomb
   layers:
   - Default
   - TransparentFX
