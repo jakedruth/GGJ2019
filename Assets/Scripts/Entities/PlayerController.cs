@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         _entity = GetComponent<Entity>();
         _entity.isPlayer = true;
-        _entity.onDeath += PlayerDied;
+        _entity.OnEntityDeath.AddListener(PlayerDied);
 
         _sword = transform.GetComponentInChildren<SwordHandler>();
     }

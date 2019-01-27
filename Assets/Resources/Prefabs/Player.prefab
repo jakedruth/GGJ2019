@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 646170216}
   - component: {fileID: 805194229374419456}
   - component: {fileID: 646170218}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SwordBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7815460332169490805}
   - component: {fileID: 7815460332169490804}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 7815460333010385663}
   - component: {fileID: 7815460333010385648}
   - component: {fileID: 7815460333010385660}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7695171268834097743}
   - component: {fileID: 8658995186572404371}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SwordTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}

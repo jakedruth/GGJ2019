@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 [SelectionBase]
 public class Entity : MonoBehaviour
@@ -17,9 +17,8 @@ public class Entity : MonoBehaviour
 
     public bool isDead { get; private set; }
 
-    public delegate void OnDeath();
-    public OnDeath onDeath;
-
+    public UnityEvent OnEntityDeath;
+    
     public void Awake()
     {
         CurrentHP = maxHP;
@@ -44,7 +43,7 @@ public class Entity : MonoBehaviour
             if (isDead)
             {
                 CurrentHP = 0;
-                onDeath?.Invoke();
+                OnEntityDeath.Invoke();
             }
         }
 
