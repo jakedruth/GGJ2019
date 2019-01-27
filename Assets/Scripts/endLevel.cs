@@ -11,7 +11,10 @@ public class endLevel : MonoBehaviour
         Entity entity = collision.GetComponent<Entity>();
         if (entity != null && entity.isPlayer)
         {
-            levelHandeler.instance.loadScene(hubWorld);
+            if(worldHubManager.instance != null)
+            {
+                worldHubManager.instance.currentQuest.checkReward();
+            }
         }
     }
 }

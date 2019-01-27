@@ -675,6 +675,19 @@ MonoBehaviour:
   firstQuest: {fileID: 11400000, guid: dfd13ef0597a2cf42948d277b5fce1e2, type: 2}
   secondQuest: {fileID: 11400000, guid: dfd13ef0597a2cf42948d277b5fce1e2, type: 2}
   thirdQuest: {fileID: 11400000, guid: dfd13ef0597a2cf42948d277b5fce1e2, type: 2}
+  currentQuest: {fileID: 11400000, guid: dfd13ef0597a2cf42948d277b5fce1e2, type: 2}
+  costMultiplyer: 1
+  money: 0
+  currentHouseLevel: 0
+  currentHouseExp: 0
+  currentLenghtLevel: 0
+  currentLenghtExp: 0
+  currentStranghtLevel: 0
+  currentStrangthExp: 0
+  currentHealthLevel: 0
+  currentHealthExp: 0
+  currentSheildLevel: 0
+  currentSheildExp: 0
 --- !u!4 &1214862744
 Transform:
   m_ObjectHideFlags: 0
