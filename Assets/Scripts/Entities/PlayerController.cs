@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
                     Bomb b = hit.transform.GetComponent<Bomb>();
                     Vector3 displacement = b.transform.position - transform.position;
                     b.ApplyForce(displacement.normalized);
+                    b.StartFuse();
                 }
             }
         }
