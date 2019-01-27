@@ -8,6 +8,7 @@ TagManager:
   - Switch
   - Bomb
   - Breakable
+  - Chest
   layers:
   - Default
   - TransparentFX

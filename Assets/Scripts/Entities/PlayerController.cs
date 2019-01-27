@@ -69,6 +69,12 @@ public class PlayerController : MonoBehaviour
                     b.ApplyForce(displacement.normalized);
                     b.StartFuse();
                 }
+
+                if(hit.transform.tag == "Chest")
+                {
+                    Chest c = hit.transform.GetComponent<Chest>();
+                    c.OpenChest();
+                }
             }
         }
 
