@@ -7,6 +7,8 @@ public class worldHubManager : MonoBehaviour
     public quest secondQuest;
     public quest thirdQuest;
 
+    public quest currentQuest;
+
     public int costMultiplyer = 1;
 
 
