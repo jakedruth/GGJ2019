@@ -33,7 +33,7 @@ public class ElectricDoor : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, displacement.magnitude, entityLayer);
             if (hit)
             {
-                if (hit.transform.tag == "Player")
+                if (hit.transform.tag == "Player" || hit.transform.tag == "enemy")
                 {
                     Entity pc = hit.transform.GetComponent<Entity>();
                     float force = 20;
