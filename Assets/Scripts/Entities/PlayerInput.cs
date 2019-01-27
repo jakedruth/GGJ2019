@@ -34,8 +34,10 @@ public class PlayerInput : MonoBehaviour
         }
 
         bool attackKeyDown = Input.GetKeyDown(KeyCode.J);
+        bool shieldKey = Input.GetKey(KeyCode.K);
+
         input.Normalize();
 
-        _playerController.RecieveInput(input, attackKeyDown, false);
+        _playerController.RecieveInput(input, attackKeyDown, shieldKey);
     }
 }

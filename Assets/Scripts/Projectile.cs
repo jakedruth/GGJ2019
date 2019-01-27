@@ -25,6 +25,26 @@ public class Projectile : MonoBehaviour
 
         if (e != null)
         {
+            if(e.tag == "Player")
+            {
+                PlayerController pc = e.GetComponent<PlayerController>();
+                if(pc.IsShielding)
+                {
+                    float projectileAngle = Vector3.SignedAngle(direction, Vector3.right, Vector3.back);
+                    float delta = Mathf.Abs(Mathf.DeltaAngle(projectileAngle + 180, pc.rotationInDegrees));
+
+                    Debug.Log($"projectile + 180: {projectileAngle + 180} pc: {pc.rotationInDegrees} delta abs: {delta}");
+
+                    if (delta < pc.ShieldRef.halfAngle)
+                    {
+                        direction *= -1;
+                        hurtEnemy = true;
+                        hurtPlayer = false;
+                        return;
+                    }
+                }
+            }
+
             e.DealDamage(damage);
         }
 

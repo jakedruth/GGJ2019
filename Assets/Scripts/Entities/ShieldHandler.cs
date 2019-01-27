@@ -8,7 +8,7 @@ public class ShieldHandler : MonoBehaviour
     public int detail;
     public float angle;
     public float shieldDistanceFromCenter;
-    private float halfAngle { get { return angle / 2; } }
+    public float halfAngle { get { return angle / 2; } }
 
     // Start is called before the first frame update
     void Awake()

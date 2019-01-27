@@ -6,8 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Entity _entity;
-    private SwordHandler _sword;
-    private ShieldHandler shield;
+    public SwordHandler SwordRef { get; private set; }
+    public ShieldHandler ShieldRef { get; private set; }
+    public bool IsShielding { get; private set; }
 
     [Header("Movement")]
     public float rotateSpeed;
@@ -26,21 +27,26 @@ public class PlayerController : MonoBehaviour
         _entity.isPlayer = true;
         _entity.OnEntityDeath.AddListener(PlayerDied);
 
-        _sword = transform.GetComponentInChildren<SwordHandler>();
+        SwordRef = transform.GetComponentInChildren<SwordHandler>();
+
+        ShieldRef = transform.GetComponentInChildren<ShieldHandler>();
     }
 
-    public void RecieveInput(Vector3 direction, bool attackKeyDown, bool shieldKeyDown)
+    public void RecieveInput(Vector3 direction, bool attackKeyDown, bool shieldKey)
     {
         if (attackKeyDown)
         {
-            _sword.StartAttack(rotationInDegrees);
+            SwordRef.StartAttack(rotationInDegrees);
         }
 
+        IsShielding = shieldKey;
+        ShieldRef.gameObject.SetActive(IsShielding);
+
         // check for entities
-        if (_sword.IsAttacking())
+        if (SwordRef.IsAttacking())
         {
             //Debug.DrawRay(_sword.transform.position, _sword.transform.right, Color.blue, 1.0f);
-            Ray2D ray = new Ray2D(_sword.transform.position, _sword.transform.right);
+            Ray2D ray = new Ray2D(SwordRef.transform.position, SwordRef.transform.right);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, swordLength, swordInteractLayer);
             if(hit)
             {
@@ -61,9 +67,9 @@ public class PlayerController : MonoBehaviour
 
         const float deadZone = 0.01f;
         float targetSpeed = 0;
-        if (direction.sqrMagnitude > deadZone * deadZone && !_sword.IsAttacking())
+        if (direction.sqrMagnitude > deadZone * deadZone && !SwordRef.IsAttacking())
         {
-            targetSpeed = _entity.maxMoveSpeed;
+            targetSpeed = IsShielding ? 0 : _entity.maxMoveSpeed;
             float angle = Vector3.SignedAngle(direction, Vector3.right, Vector3.back);
             //float targetAngle = Mathf.Round(angle / 45f) * 45f; // created choppy rotation some how?
             rotationInDegrees = Mathf.MoveTowardsAngle(rotationInDegrees, angle, rotateSpeed * GameManager.DeltaTime);
@@ -71,16 +77,6 @@ public class PlayerController : MonoBehaviour
         }
 
         _entity.velocity = Vector3.MoveTowards(_entity.velocity, direction * targetSpeed, _entity.acceleration * GameManager.DeltaTime);
-    }
-
-    public void Attack()
-    {
-
-    }
-
-    public void Shield()
-    {
-
     }
 
     public void PlayerDied()
