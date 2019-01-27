@@ -5,11 +5,11 @@ using UnityEngine;
 public class ArrowPusher : MonoBehaviour
 {
     public float pushSpeed;
-    public bool angled;
+    public Vector3 pushDirection;
 
     Vector3 Direction
     {
-        get { return angled ? (transform.right + transform.up).normalized : transform.right; }
+        get { return pushDirection.normalized; }
     }
 
     KeyValuePair<Vector3, float> Pair
@@ -22,6 +22,7 @@ public class ArrowPusher : MonoBehaviour
         Entity other = collision.GetComponent<Entity>();
         if (other != null)
         {
+            Debug.Log($"pushing: {Pair.Key}", gameObject);
             other.PushDirections.Add(Pair);
         }
     }

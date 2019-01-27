@@ -55,9 +55,12 @@ public class ElectricDoor : MonoBehaviour
     public void ToggleDoor()
     {
         IsOn = !IsOn;
-
         GetComponent<LineRenderer>().enabled = IsOn;
+    }
 
-        //return IsOn;
+    public void SetDoor(bool value)
+    {
+        IsOn = value;
+        GetComponent<LineRenderer>().enabled = IsOn;
     }
 }

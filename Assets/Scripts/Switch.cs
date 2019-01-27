@@ -6,7 +6,7 @@ public class Switch : MonoBehaviour
 {
     public float coolDownTimer = 0.1f;
     private bool isCoolingDown;
-    public UnityEngine.Events.UnityEvent hitBySword;
+    public UnityEngine.Events.UnityEvent hit;
 
     public void ActivateSwitch()
     {
@@ -20,7 +20,7 @@ public class Switch : MonoBehaviour
     {
         isCoolingDown = true;
 
-        hitBySword.Invoke();
+        hit.Invoke();
 
         yield return new WaitForSeconds(coolDownTimer * GameManager.gameSpeedMultiplier);
 

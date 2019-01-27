@@ -31,7 +31,7 @@ public class Pipe : MonoBehaviour
     }
 
     [ContextMenu("Start Spark")]
-    public void StartTimer()
+    public void StartSpark()
     {
         if(!IsRunning)
         {
