@@ -17,5 +17,5 @@ MonoBehaviour:
   reward: 0
   cost: 0
   rooms:
-  - defaultRoom
+  - Room002
   current_room: 0
